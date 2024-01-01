@@ -1,0 +1,42 @@
+{%load static%}
+<link href="{% static 'css/register.css' %}" rel="stylesheet">
+<form action="{%url 'register'%}" class="form" method="POST">
+    <p class="title">Registration Form </p>
+    <p class="message">Signup now and get full access to Vibe Call. </p>
+    {% csrf_token %}
+    <div class="flex">
+        <label>
+            <input class="input" name="first_name" placeholder="" required="" type="text">
+            <span>Firstname</span>
+        </label>
+
+        <label>
+            <input class="input" name="last_name" placeholder="" required="" type="text">
+            <span>Lastname</span>
+        </label>
+    </div>
+
+    <label>
+        <input class="input" name="email" placeholder="" required="" type="email">
+        <span>Email</span>
+    </label>
+
+    <label>
+        <input class="input" name="password1" placeholder="" required="" type="password">
+        <span>Password</span>
+    </label>
+    <label>
+        <input class="input" name="password2" placeholder="" required="" type="password">
+        <span>Confirm password</span>
+    </label>
+
+    <div style="text-align: center;">
+        {% if error %}
+        <p style="color: #ff0000;">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <button>Register</button>
+    <p class="signin">Already have an account ? <a href="{% url 'login' %}">SignIn!</a></p>
+</form>
+
