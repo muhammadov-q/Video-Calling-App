@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="login-box">
-    <p class="title">Login</p>
+    <p class="title">Login VibeCall</p>
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         <div class="user-box">
@@ -31,8 +31,10 @@
         </div>
 
         <input type="submit" class="button" value="Login">
+        <p><a class="a2" href="{% url 'password_reset' %}">Forget Password?</a></p>
 
     </form>
+
     <p>Don't have an account? <a class="a2" href="{% url 'register' %}">Sign up!</a></p>
 </div>
 </body>

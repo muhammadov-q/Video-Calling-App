@@ -1,15 +1,92 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.contrib.auth.tokens import default_token_generator
-from django.template.loader import render_to_string
-from django.core.mail import EmailMessage
-from .forms import RegisterForm
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils.encoding import force_str, force_bytes
+from django.utils.html import strip_tags
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
+from .forms import RegisterForm
+
+user = get_user_model()
+
+
+def password_reset(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.filter(email=email).first()
+
+            if user:
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                token = default_token_generator.make_token(user)
+
+                current_site = request.get_host()
+
+                subject = 'Password Reset'
+                context = {
+                    'user': user,
+                    'protocol': request.scheme,
+                    'domain': current_site,
+                    'uid': uid,
+                    'token': token,
+                    'timeout': 24,  # Set the actual timeout value here
+                }
+
+                html_message = render_to_string('password_reset_email.html', context)
+                text_message = strip_tags(html_message)
+
+                email = EmailMultiAlternatives(subject, text_message, to=[user.email])
+                email.attach_alternative(html_message, "text/html")
+                email.send()
+
+                success_message = 'Password reset email sent. Check your inbox. Redirecting login page in 5 secs!'
+                return render(request, 'password_reset.html', {'form': form, 'success_message': success_message})
+
+            else:
+                # Email not found in the system
+                error = 'Email not found. Please try again!'
+                return render(request, 'password_reset.html', {'form': form, 'error': error})
+
+    else:
+        form = PasswordResetForm()
+
+    return render(request, 'password_reset.html', {'form': form})
+
+
+def password_reset_confirm(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    form = None  # Define the form variable outside the if block
+
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = SetPasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Password reset successfully. You can now log in with your new password.')
+                return render(request, 'password_reset_success.html')
+        else:
+            form = SetPasswordForm(user)
+
+        return render(request, 'password_reset_confirm.html', {'form': form})
+    else:
+        messages.error(request, 'Invalid password reset link.')
+        return render(request, 'password_reset_confirm.html', {'form': form})
 
 
 def register(request):
