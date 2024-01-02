@@ -6,16 +6,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Video Conference</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <body>
-    <div class="dashboard">
-        <h1>Welcome, {{name}}!</h1>
-        <!-- create a "New Meeting" button -->
-        <a href="#" class="button">New Meeting</a>
-        <a href="#" class="button">Join Meeting</a>
-        <a href="#" class="button">Logout</a>
-    </div>
-  </body>
+  <title>VibeCall - Video Conference</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
 </head>
+<body>
+  <div class="dashboard">
+    <h1>Welcome, {{ name }}!</h1>
+    <div class="buttons-container">
+      <a href="#" class="button new-meeting">New Meeting</a>
+      <a href="#" class="button join-meeting">Join Meeting</a>
+      <a href="{% url 'login' %}" class="button logout">Logout</a>
+    </div>
+  </div>
+</body>
 </html>

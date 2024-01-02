@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Email Confirmation</title>
+    <style>
+        body {
+            font-family: Roboto, "Segoe UI", "Helvetica Neue", sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #282c35;
+        }
+
+        .funds-success-message-container {
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .funds-checkmark-text-container {
+            width: auto;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .funds-checkmark-container {
+            display: inline-block;
+            width: 70px;
+        }
+
+        .funds-success-done-text {
+            margin: 15px 0 0 0;
+            font-size: 28pt;
+            font-weight: 700;
+        }
+
+        .funds-success-message {
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        h2 {
+            font-size: 18pt;
+            margin-top: 25px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 12pt;
+            padding-bottom: 1em;
+            line-height: 27.2px;
+        }
+
+        /* CHECKMARK */
+        .funds-checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 5;
+            stroke-miterlimit: 10;
+            stroke: #33bb11;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .funds-checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 5;
+            stroke: #ffffff;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0px 0px 0px #33bb11;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+        }
+
+        .funds-checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        button {
+            background: transparent;
+            color: #ffffff;
+            font-size: 17px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: none;
+            padding: 20px 30px;
+            perspective: 30rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.308);
+        }
+
+        button::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+            background: linear-gradient(320deg, rgba(24, 109, 178, 0.67), rgba(128, 0, 128, 0.308));
+            transition: background 3s;
+        }
+
+        button:hover::before {
+            animation: rotate 1s;
+            transition: all .5s;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(180deg);
+            }
+
+            100% {
+                transform: rotateY(360deg);
+            }
+        }
+
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #33bb11;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="funds-success-message-container">
+    <div class="funds-checkmark-text-container">
+        <div class="funds-checkmark-container">
+            <svg class="funds-checkmark" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+                <circle class="funds-checkmark-circle" cx="26" cy="26" fill="none" r="25"/>
+                <path class="funds-checkmark-check" d="M14.1 27.2l7.1 7.2 16.7-16.8" fill="none"/>
+            </svg>
+        </div>
+        <h1 class="funds-success-done-text">Email Confirmation Successful!</h1>
+    </div>
+    <div class="funds-success-message">
+        <h2>We think you made the right choice.</h2>
+        <p>Thank you for confirming your email. You can now login using the button below.</p>
+
+        <a class="login-button" href="{% url 'login' %}">
+            <button>Login</button>
+        </a>
+    </div>
+</div>
+</body>
+
+</html>
