@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>404 Page not found</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .page_404 {
+        padding: 40px 0;
+        background: #fff;
+        font-family: 'Arvo', serif;
+    }
+
+    .page_404 img {
+        width: 100%;
+    }
+
+    .four_zero_four_bg {
+        margin-top: 100px;
+        padding-bottom: 100px;
+        background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+        height: 400px;
+        background-position: center;
+    }
+
+    .four_zero_four_bg h1 {
+        font-size: 80px;
+    }
+
+    .four_zero_four_bg h3 {
+        font-size: 80px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 1em 3.3em;
+        cursor: pointer;
+        transform: perspective(200px) rotateX(15deg);
+        color: white;
+        font-weight: 900;
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient(
+                0deg,
+                rgba(63, 94, 251, 1) 0%,
+                rgba(70, 135, 252, 1) 100%
+        );
+        box-shadow: rgba(63, 94, 251, 0.2) 0px 40px 29px 0px;
+        will-change: transform;
+        transition: all 0.3s;
+        border-bottom: 2px solid rgba(70, 135, 252, 1);
+    }
+
+    button:hover {
+        transform: perspective(180px) rotateX(30deg) translateY(2px);
+    }
+
+    button:active {
+        transform: perspective(170px) rotateX(36deg) translateY(5px);
+    }
+
+    .content_box_404 {
+        margin-top: -50px;
+    }
+</style>
+
+<body>
+<section class="page_404">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="col-sm-10 col-sm-offset-1  text-center">
+                    <div class="four_zero_four_bg">
+                        <h1 class="text-center ">404</h1>
+                    </div>
+                    <div class="content_box_404">
+                        <h3 class="h2">
+                            Looks like you're lost
+                        </h3>
+                        <p>the page you are looking for is not available!</p>
+                        <a href="javascript:history.back()">
+                            <button>Go Back</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

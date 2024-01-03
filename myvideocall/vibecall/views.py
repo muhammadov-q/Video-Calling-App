@@ -20,6 +20,11 @@ def index(request):
     return render(request, 'index.html')
 
 
+def page_Not_Found(request):
+    previous_url = request.META.get('HTTP_REFERER', '/')
+    return render(request, '404.html', {'previous_url': previous_url})
+
+
 user = get_user_model()
 
 
