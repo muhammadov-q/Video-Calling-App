@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_str, force_bytes
 from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
 from .forms import RegisterForm
 
 
@@ -48,7 +49,7 @@ def password_reset(request):
                     'domain': current_site,
                     'uid': uid,
                     'token': token,
-                    'timeout': 24,  # Set the actual timeout value here
+                    'timeout': 24,
                 }
 
                 html_message = render_to_string('password_reset_email.html', context)
@@ -62,7 +63,6 @@ def password_reset(request):
                 return render(request, 'password_reset.html', {'form': form, 'success_message': success_message})
 
             else:
-                # Email not found in the system
                 error = 'Email not found. Please try again!'
                 return render(request, 'password_reset.html', {'form': form, 'error': error})
 
@@ -79,7 +79,7 @@ def password_reset_confirm(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
 
-    form = None  # Define the form variable outside the if block
+    form = None
 
     if user is not None and default_token_generator.check_token(user, token):
         if request.method == 'POST':

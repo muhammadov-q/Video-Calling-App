@@ -1,21 +1,199 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Video Conference</title>
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
-  <body>
-    <div class="intro">
-        <h1>Welcome to my Awesome Video Conferencing App!</h1>
-        <h2>For all your professional and personal needs!</h2>
-        <!-- create a signup and signin button-->
-        <a href="{% url 'login' %}" class="button">Sign In</a>
-        <a href="{% url 'register' %}" class="button">Sign Up</a>
-    </div>
-  </body>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Welcome VibeCall</title>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #282c35;
+        }
+
+        .main .title {
+            position: absolute;
+            top: 35%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            font-size: 60px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            padding-left: 30px;
+            color: #00bfff;
+        }
+
+
+        .main .title::before {
+            width: 16px;
+            height: 16px;
+        }
+
+        .main .title::after {
+            width: 16px;
+            height: 16px;
+            animation: pulse 1s linear infinite;
+        }
+
+        .main .title::before,
+        .main .title::after {
+            position: absolute;
+            content: "";
+            height: 30px;
+            width: 30px;
+            border-radius: 80%;
+            left: -20px;
+            background-color: #f10000;
+        }
+
+
+        .main .slang {
+            position: absolute;
+            top: 35%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            margin-top: 100px;
+            font-size: 22px;
+            word-spacing: 2px;
+            color: #fff;
+            font-family: monospace;
+            overflow: hidden;
+        }
+
+        .main .slang span {
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: .15em solid orange;
+            animation: typing 10s steps(45, end) infinite, blink-caret 0.5s step-end infinite;
+        }
+
+        @keyframes typing {
+            0%, 40%, 100% {
+                width: 0;
+                border-color: transparent;
+            }
+            60%, 100% {
+                width: 100%;
+                border-color: transparent;
+            }
+            65%, 95% {
+                width: 100%;
+                border-color: orange;
+            }
+            100% {
+                width: 100%;
+                border-color: transparent;
+                animation-delay: 1s;
+            }
+        }
+
+        @keyframes blink-caret {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: orange;
+            }
+        }
+
+        .main .slang span:nth-child(odd) {
+            animation-delay: 1s;
+        }
+
+        form.sidebar {
+            width: 40%;
+            height: 100%;
+            float: right;
+            box-sizing: border-box;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .intro {
+            position: relative;
+            text-align: center;
+            margin-top: 60%;
+            transform: translateY(-50%);
+        }
+
+        .intro h1 {
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 38px;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-decoration: none;
+            font-style: normal;
+            font-variant: normal;
+            text-transform: none;
+        }
+
+        .intro .button {
+            font-size: 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #2d20f5;
+            border-radius: 5px;
+            transition: transform .4s ease-in-out;
+
+            padding: 18px 25px;
+            margin-left: 10px;
+            width: 200px;
+
+            display: inline-block;
+        }
+
+        .intro .button:hover {
+            background-color: #0c019a;
+        }
+
+        .footer {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(0.9);
+                opacity: 1;
+            }
+            to {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
+<body>
+<div class="main">
+    <div class="title">
+        <h2>Vibe Call</h2>
+    </div>
+    <div class="slang">
+        <span>For all your professional and personal needs!</span>
+    </div>
+</div>
+<form class="sidebar">
+    <div class="intro">
+        <h1>Get started!</h1>
+        <a class="button" href="{% url 'login' %}">Login</a>
+        <a class="button" href="{% url 'register' %}">Sign Up</a>
+    </div>
+    <div class="footer">
+        <p>© 2024 VibeCall. All rights reserved.</p>
+    </div>
+</form>
+</body>
 </html>
