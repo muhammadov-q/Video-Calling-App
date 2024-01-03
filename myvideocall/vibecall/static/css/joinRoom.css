@@ -81,7 +81,7 @@ body {
 
 /* Button styles */
 .form input.button {
-    background-color: #3498db;
+    background-color: #3370e6;
 }
 
 .form a.button {
@@ -92,7 +92,7 @@ body {
 
 /* Hover effect */
 .form input.button:hover {
-    background-color: #2980b9;
+    background-color: #134bb9;
 }
 
 .form a.button:hover {

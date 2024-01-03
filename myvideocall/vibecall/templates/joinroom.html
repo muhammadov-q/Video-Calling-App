@@ -14,7 +14,7 @@
         <form action="{% url 'join_room' %}" method="POST">
             {% csrf_token %}
             <label>
-                <input name="roomID" placeholder="Enter room link" required type="text">
+                <input name="roomID" placeholder="Enter the room's link" required type="text">
             </label>
 
             <input class="button" type="submit" value="Join">
