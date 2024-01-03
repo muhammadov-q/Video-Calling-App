@@ -3,20 +3,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>VibeCall - Video Conference</title>
-  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>VibeCall</title>
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
 </head>
 <body>
-  <div class="dashboard">
-    <h1>Welcome, {{ name }}!</h1>
-    <div class="buttons-container">
-      <a href="#" class="button new-meeting">New Meeting</a>
-      <a href="#" class="button join-meeting">Join Meeting</a>
-      <a href="{% url 'login' %}" class="button logout">Logout</a>
-    </div>
-  </div>
+<div class="buttons-container">
+    <h1>Vibe Call</h1>
+    <h2>Welcome, {{ name }} {{ last }}!</h2>
+    <a class="button new-meeting" href="{% url 'meeting' %}">New Meeting</a>
+    <a class="button join-meeting" href="{% url 'join_room' %}">Join Meeting</a>
+    <a class="button logout" href="{% url 'login' %}">Logout</a>
+</div>
 </body>
 </html>

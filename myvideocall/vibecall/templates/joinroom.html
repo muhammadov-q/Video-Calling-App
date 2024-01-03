@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="{% static 'css/joinRoom.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="login form">
+        <header>Join Room</header>
+        <form action="{% url 'join_room' %}" method="POST">
+            {% csrf_token %}
+            <label>
+                <input name="roomID" placeholder="Enter room link" required type="text">
+            </label>
+
+            <input class="button" type="submit" value="Join">
+            <a class="button" href="{% url 'dashboard' %}">Go back</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

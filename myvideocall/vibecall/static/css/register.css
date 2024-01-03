@@ -27,7 +27,7 @@ body {
 .title {
   font-size: 28px;
   font-weight: 600;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
   position: relative;
   display: flex;
   align-items: center;

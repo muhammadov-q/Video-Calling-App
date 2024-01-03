@@ -10,12 +10,15 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
-from django.urls import reverse
 from django.utils.encoding import force_str, force_bytes
 from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-
 from .forms import RegisterForm
+
+
+def index(request):
+    return render(request, 'index.html')
+
 
 user = get_user_model()
 
@@ -149,4 +152,17 @@ def login_view(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'dashboard.html', {'name': request.user.first_name})
+    return render(request, 'dashboard.html', {'name': request.user.first_name, 'last': request.user.last_name})
+
+
+@login_required
+def videocall(request):
+    return render(request, 'videocall.html', {'name': request.user.first_name + " " + request.user.last_name})
+
+
+@login_required
+def join_room(request):
+    if request.method == 'POST':
+        roomID = request.POST['roomID']
+        return redirect(roomID)
+    return render(request, 'joinroom.html')
